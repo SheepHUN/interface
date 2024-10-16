@@ -16,7 +16,11 @@ namespace @interface
         public Form1()
         {
             InitializeComponent();
-            Start();
+            Form2 asd = new Form2();
+            asd.ShowDialog();
+            this.Hide();
+           
+            //Start();
         }
         void Start() {
             db = new dbHandler();
