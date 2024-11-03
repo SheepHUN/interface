@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +17,7 @@ namespace @interface
         List<PictureBox> trains = new List<PictureBox>();
         Random random = new Random();
         Timer trainTimer = new Timer();
+        int points = 0;
         public Form2()
         {
             InitializeComponent();
@@ -57,22 +58,26 @@ namespace @interface
         }
         void CarMoveTimer(object s, EventArgs e)
         {
-            foreach (PictureBox car in cars) {
-                if (!gateIsOpen)
+            for (int i = cars.Count - 1; i >= 0; i--)
+            {
+                PictureBox car = cars[i];
+
+                if (!gateIsOpen && car.Location.X > 199)
                 {
-                    if (car.Location.X > 199)
-                    {
-                        MoveCar(car);
-                    }
-                }
-                else {
                     MoveCar(car);
                 }
-                if (car.Location.X == 480) {
-                    Controls.Remove(car);
-                    cars.Remove(car);
+                else if (gateIsOpen)
+                {
+                    MoveCar(car);
                 }
 
+                if (car.Location.X >= 480)
+                {
+                    Controls.Remove(car);
+                    cars.RemoveAt(i);
+                    points++;
+                    pointslabel.Text = $"Points: {points}";
+                }
             }
         }
         void MoveCar(PictureBox car)
@@ -93,16 +98,30 @@ namespace @interface
 
         void TrainMoveTimer(object s, EventArgs e)
         {
-            foreach (PictureBox train in trains)
+            for (int i = trains.Count - 1; i >= 0; i--)
             {
+                PictureBox train = trains[i];
                 train.Top -= 4;
                 train.BringToFront();
-                
 
-                if (train.Location.Y == -100)
+                if (train.Location.Y <= -100)
                 {
                     Controls.Remove(train);
-                    trains.Remove(train);
+                    trains.RemoveAt(i);
+                }
+
+                for (int j = cars.Count - 1; j >= 0; j--)
+                {
+                    PictureBox car = cars[j];
+                    if (train.Bounds.IntersectsWith(car.Bounds))
+                    {
+                        Controls.Remove(car);
+                        cars.RemoveAt(j);
+                        points--;
+                        pointslabel.Text = $"Points: {points}";
+
+                        break; 
+                    }
                 }
             }
         }
