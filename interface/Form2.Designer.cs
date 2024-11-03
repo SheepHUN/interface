@@ -1,4 +1,4 @@
-﻿
+
 namespace @interface
 {
     partial class Form2
@@ -35,6 +35,7 @@ namespace @interface
             this.trainspawner = new System.Windows.Forms.PictureBox();
             this.crossingbtn = new Guna.UI2.WinForms.Guna2Button();
             this.crossing = new System.Windows.Forms.PictureBox();
+            this.pointslabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.carroad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trainroad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.carspawn)).BeginInit();
@@ -104,10 +105,21 @@ namespace @interface
             this.crossing.TabIndex = 5;
             this.crossing.TabStop = false;
             // 
+            // pointslabel
+            // 
+            this.pointslabel.AutoSize = true;
+            this.pointslabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.pointslabel.Location = new System.Drawing.Point(12, 9);
+            this.pointslabel.Name = "pointslabel";
+            this.pointslabel.Size = new System.Drawing.Size(81, 24);
+            this.pointslabel.TabIndex = 6;
+            this.pointslabel.Text = "Points: 0";
+            // 
             // Form2
             // 
             this.BackColor = System.Drawing.Color.LawnGreen;
             this.ClientSize = new System.Drawing.Size(486, 572);
+            this.Controls.Add(this.pointslabel);
             this.Controls.Add(this.crossing);
             this.Controls.Add(this.crossingbtn);
             this.Controls.Add(this.trainspawner);
@@ -121,6 +133,7 @@ namespace @interface
             ((System.ComponentModel.ISupportInitialize)(this.trainspawner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.crossing)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -133,5 +146,6 @@ namespace @interface
         private System.Windows.Forms.PictureBox trainspawner;
         private Guna.UI2.WinForms.Guna2Button crossingbtn;
         private System.Windows.Forms.PictureBox crossing;
+        private System.Windows.Forms.Label pointslabel;
     }
 }
